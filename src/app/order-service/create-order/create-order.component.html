@@ -1,0 +1,64 @@
+<mat-card class="doctor-container">
+    <div class="form-container">
+        <form [formGroup]="orderServiceForm" (submit)="submit()">
+            <h3>Cadastro de Ordem de Serviço</h3>
+            <br>
+            <mat-form-field class="form-field" appearance="fill">
+                <mat-label> Data
+                </mat-label>
+                <input matInput formControlName="data" type="date" required>
+                <mat-error *ngIf="data.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="fill" typ>
+                <mat-label> Convenio
+                </mat-label>
+                <input matInput formControlName="covenant" type="text" required>
+                <mat-error *ngIf="covenant.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="fill" typ>
+                <mat-label> Medico
+                </mat-label>
+                <mat-select formControlName="doctor" placeholder="Medico" >
+                    <mat-select-filter [array]="doctors" (filteredReturn)="filteredListDoctors =$event"></mat-select-filter>
+                    <mat-option *ngFor="let item of filteredListDoctors" [value]="item">
+                        {{item.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="fill" typ>
+                <mat-label> Paciente
+                </mat-label>
+                <mat-select formControlName="patient" placeholder="Paciente" >
+                    <mat-select-filter [array]="patients" (filteredReturn)="filteredListPatients =$event"></mat-select-filter>
+                    <mat-option *ngFor="let item of filteredListPatients" [value]="item">
+                        {{item.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="fill" typ>
+                <mat-label> Posto de Coleta
+                </mat-label>
+                <mat-select formControlName="collectionPost" placeholder="Posto de Coleta" >
+                    <mat-select-filter [array]="collectionPosts" (filteredReturn)="filteredListCollectionPosts =$event"></mat-select-filter>
+                    <mat-option *ngFor="let item of filteredListCollectionPosts" [value]="item">
+                        {{item.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="fill" typ>
+                <mat-label> Exames
+                </mat-label>
+                <mat-select formControlName="examlist" placeholder="Exames" multiple>
+                    <mat-select-filter [array]="exams" (filteredReturn)="filteredListExams =$event"></mat-select-filter>
+                    <mat-option *ngFor="let item of filteredListExams" [value]="item">
+                        {{item.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <br>
+            <br>
+            <button mat-raised-button color="primary" type="submit">Cadastrar</button>
+        </form>
+    </div>
+</mat-card>
